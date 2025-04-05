@@ -1,176 +1,642 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Cameron J. Owen, Ph.D.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cameron J. Owen, Ph.D.</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --accent: #60a5fa;
+            --light: #f3f4f6;
+            --dark: #111827;
+            --text: #374151;
+            --background: #ffffff;
+            --section: #f9fafb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+        }
+        
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--primary);
+        }
+        
+        /* Header styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .hero-image {
+            border-radius: 50%;
+            border: 4px solid white;
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--light);
+            transform: translateY(-2px);
+        }
+        
+        /* Main content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background-color: var(--section);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            font-size: 1.8rem;
+        }
+        
+        /* Contact section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        /* Education & Experience */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 15px;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            left: 0px;
+        }
+        
+        .timeline-content {
+            padding: 1rem;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* Technical Expertise */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .skill-category {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .skill-category h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Publications */
+        .publication {
+            background-color: white;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .publication:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .publication-title {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Highlights */
+        .highlights-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .highlight-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .highlight-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .highlight-image img, .highlight-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .highlight-content {
+            padding: 1rem;
+        }
+        
+        .highlight-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .highlights-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">Cameron J. Owen</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#highlights">Highlights</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-image">
+                <img src="./Cameron-Owen-Chemistry-1.jpg" alt="Cameron J. Owen">
+            </div>
+            <div class="hero-text">
+                <h1>Cameron J. Owen, Ph.D.</h1>
+                <p>Computational materials scientist at the intersection of chemistry, physics, and machine learning. Focused on empowering humans through advanced materials science and chemistry.</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+    
+    <main>
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p>My expertise lies at the intersection of chemistry, physics, and machine-learning. I care about the science and technology that empowers humans to live more fulfilling lives.</p>
+            <p>With extensive experience in computational materials science and a strong foundation in machine learning methods, I develop novel approaches to solve complex materials challenges that can transform industries and human experiences.</p>
+        </section>
+        
+        <section id="contact" class="section">
+            <h2>Contact & Socials</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>E-Mail: echo "moc.liamg@clsnewonoremac" | rev</span>
+                </div>
+                <div class="contact-item">
+                    <span>💼</span>
+                    <a href="https://www.linkedin.com/in/cameron-j-owen-0baaa1117/">LinkedIn: Cameron J. Owen</a>
+                </div>
+                <div class="contact-item">
+                    <span>🐦</span>
+                    <span>Twitter/X: @cameron_cowen</span>
+                </div>
+                <div class="contact-item">
+                    <span>🌥️</span>
+                    <span>Bluesky: @cjo1.bsky.social</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience" class="section">
+            <h2>Education & Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">Mirian Technologies</div>
+                        <div>Technical Co-Founder</div>
+                        <div>2024-2025</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">Harvard University</div>
+                        <div>Postdoctoral Research Fellow, Materials Intelligence Research Group</div>
+                        <div>2024-2024</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">Harvard University</div>
+                        <div>Ph.D. in Chemistry, Materials Intelligence Research Group</div>
+                        <div>2020-2024</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">University of Cambridge</div>
+                        <div>MPhil in Chemistry, Surface Science Group</div>
+                        <div>2019-2020</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">Micron Technology</div>
+                        <div>Metrology Process Development Intern</div>
+                        <div>2019-2019</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">University of Utah</div>
+                        <div>Honors B.S. in Chemistry, B.S. in Physics, Math minor, Cum Laude</div>
+                        <div>2015-2019</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">University of Utah</div>
+                        <div>Undergraduate research fellow in the Armentrout Research Group</div>
+                        <div>2015-2019</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="expertise" class="section">
+            <h2>Technical Expertise</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Machine Learning Force Fields</h3>
+                    <ul>
+                        <li>FLARE (Gaussian Process regression)</li>
+                        <li>Allegro (PyTorch-based graph neural network)</li>
+                        <li>NequIP (message-passing graph neural network)</li>
+                        <li>MACE (message-passing graph neural network)</li>
+                        <li>MatterSim</li>
+                        <li>ORB</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Quantum Chemistry</h3>
+                    <ul>
+                        <li>VASP</li>
+                        <li>Quantum Espresso</li>
+                        <li>CASTEP</li>
+                        <li>Gaussian</li>
+                        <li>GPAW</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Atomistic Simulation</h3>
+                    <ul>
+                        <li>Atomic Simulation Environment (ASE)</li>
+                        <li>LAMMPS</li>
+                        <li>Pymatgen</li>
+                        <li>Materials Project API</li>
+                        <li>Ovito API</li>
+                        <li>Blender</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>AI & Language Models</h3>
+                    <ul>
+                        <li>ChatGPT</li>
+                        <li>Claude & Claude Code API</li>
+                        <li>Gemini</li>
+                        <li>Perplexity</li>
+                        <li>Hugging Face</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud Computing</h3>
+                    <ul>
+                        <li>Google Cloud Platform</li>
+                        <li>Amazon Web Services</li>
+                        <li>Cloudflare (r2 storage)</li>
+                        <li>Rackspace, Oracle Cloud, DigitalOcean</li>
+                        <li>SkyPilot & dstack workload managers</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>Bash</li>
+                        <li>Fortran</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="publications" class="section">
+            <h2>Scientific Publications</h2>
+            <p>Visit my <a href="https://scholar.google.com/citations?hl=en&user=uniXyQ0AAAAJ&view_op=list_works&authuser=2&sortby=pubdate">Google Scholar</a> for a complete list of publications.</p>
+        </section>
+        
+        <section id="highlights" class="section">
+            <h2>Scientific Highlights</h2>
+            <div class="highlights-container">
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <video src="./pt_co.mp4" controls autoplay muted loop></video>
+                    </div>
+                    <div class="highlight-content">
+                        <div class="highlight-title">Surface roughening in nanoparticle catalysts</div>
+                        <p>This work challenges the assumed surface structure of nanocatalysts using machine learned force fields.</p>
+                        <a href="https://arxiv.org/pdf/2407.13643">Read preprint</a>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <video src="./hpdau_new.mp4" controls autoplay muted loop></video>
+                    </div>
+                    <div class="highlight-content">
+                        <div class="highlight-title">Atomistic evolution of active sites</div>
+                        <p>Machine learned force field that can directly probe deactivation mechanisms of bimetallic catalysts.</p>
+                        <a href="https://arxiv.org/pdf/2407.13607">Read preprint</a>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <video src="./au_recon.mp4" controls autoplay muted loop></video>
+                    </div>
+                    <div class="highlight-content">
+                        <div class="highlight-title">Gold surface reconstructions</div>
+                        <p>Enabling large-scale molecular dynamics simulations to describe the thermodynamics and time evolution of gold surfaces.</p>
+                        <a href="https://www.nature.com/articles/s41467-024-48192-6">Read publication</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Awards</h2>
+            <ul>
+                <li>2024 - American Chemical Society Computers in Chemistry Division's Best Oral Presentation at the Fall National Meeting</li>
+                <li>2021 - International Precious Metals Institute Metalor Student Award</li>
+                <li>2020 - National Science Foundation Graduate Research Fellowship</li>
+                <li>2019 - Winston Churchill Scholarship</li>
+                <li>2019 - University of Utah College of Science Undergraduate Research Scholar Award Recipient</li>
+                <li>2018 - Student of the Year in the University of Utah American Chemical Society Division of Physical Chemistry</li>
+                <li>2018 - Barry M. Goldwater Scholarship</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>Invited Talks</h2>
+            <ul>
+                <li>August 2025 - Psi-k Conference, Lausanne, CH, Emerging artificial intelligence methods for computational materials discovery</li>
+                <li>March 2025 - American Chemical Society Spring Meeting, San Diego, CA, Energy & Fuels Division</li>
+                <li>August 2024 - Toyota Research Institute, Los Altos, CA, Accelerated Materials Design & Discovery Seminar</li>
+                <li>April 2024 - Institute for Mathematical and Statistical Innovation, Chicago, IL, Machine Learning Force Fields Workshop</li>
+                <li>April 2024 - Argonne Center for Nanoscale Materials, Lemont, IL, Theory and Modeling Seminar</li>
+                <li>August 2023 - American Chemical Society Fall Meeting, San Fransisco, CA, Catalysis Division</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>Professional Responsibilities</h2>
+            <ul>
+                <li>2024-Present - Reviewer for Nature Portfolio Journals (npj Computational Materials & Nature Catalysis)</li>
+                <li>2018-Present - Member of the American Chemical Society</li>
+                <li>2021-2024 - Member of the American Physical Society</li>
+                <li>2021-2024 - Member of the Materials Research Society</li>
+                <li>2021-2025 - Harvard University, Graduate student research mentor</li>
+                <li>Fall 2022 - Harvard University, Teaching fellow for CHEM 160, "The Quantum World"</li>
+                <li>Spring 2021 - Harvard University, Teaching fellow for PS 11, "Frontiers and Foundations of Modern Chemistry: A Molecular and Global Perspective"</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>Personal Interests</h2>
+            <p>Beyond my research, I'm an avid mountain biker and travel enthusiast, always seeking new experiences that broaden my perspective.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Cameron J. Owen, Ph.D. | Last updated: April 2025</p>
+        </div>
+    </footer>
 
-<h1>Cameron J. Owen, Ph.D.</h1>
-
-<img src="./Cameron-Owen-Chemistry-1.jpg" alt="Cameron" width="300" height="200">
-
-<h2>About</h2>
-My expertise lies at the intersection of chemistry, physics, and machine-learning. I care about the science and technology that empowers humans to live more fulfilling lives.
-
-<hr>
-  
-<h2>Contact & Socials</h2>
-<ul>
-  <li> E-Mail: echo "moc.liamg@clsnewonoremac" | rev </li>
-  <li> LinkedIn: <a href=https://www.linkedin.com/in/cameron-j-owen-0baaa1117/> Cameron J. Owen</a></li>
-  <li> Twitter/X: @cameron_cowen </li> 
-  <li> Bluesky: @cjo1.bsky.social </li>
-</ul>
-
-<hr>
-  
-<h2>Education & Experience</h2>
-<ul>
-  <li>2024-2025 - Mirian Technologies, Technical Co-Founder</li>
-  <li>2024-2024 - Harvard University, Postdoctoral Research Fellow in the Materials Intelligence Research Group</li>
-  <li>2020-2024 - Harvard University, Ph.D. in Chemistry, Materials Intelligence Research Group</li>
-  <li>2019-2020 - University of Cambridge, MPhil in Chemistry, Surface Science Group</li>
-  <li>2019-2019 - Micron Technology, Metrology Process Development Intern</li>
-  <li>2015-2019 - University of Utah, Honors B.S. in Chemistry, B.S. in Physics, Math minor, Cum Laude</li>
-  <li>2015-2019 - University of Utah, Undergraduate research fellow in the Armentrout Research Group</li>
-</ul>
-
-<hr>
-
-<h2>Technical Expertise</h2>
-<ul>
-  <li>Extensive experience developing and constructing workflows for the application of invariant and equivariant machine learned force fields </li> 
-  <ul>
-    <li>Fast Learning of Atomistic Rare Events (FLARE), Gaussian Process regression</li>
-    <li>Allegro, graph neural network based in PyTorch </li>
-    <li>Neural Equivariant Interatomic Potentials (NequIP), message-passing graph neural network</li>
-    <li>MACE, message-passing graph neural network</li>
-    <li>MatterSim</li>
-    <li>ORB</li>
-  </ul> 
-  <li>Extensive experience using the following density functional theory and quantum chemistry codes </li>
-  <ul>
-    <li>VASP</li>
-    <li>Quantum Espresso</li>
-    <li>CASTEP</li>
-    <li>Gaussian</li>
-    <li>GPAW</li>
-  </ul>  
-  <li>Extensive experience using the following atomistic simulation and visualization codes </li>
-  <ul>
-    <li>Atomic Simulation Environment (ASE)</li>
-    <li>Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS)</li>
-    <li>Pymatgen</li>
-    <li>Materials Project API</li>
-    <li>Ovito API</li>
-    <li>Blender</li>
-  </ul>    
-  <li>Extensive experience using the following large language frontier models and hosting services </li> 
-  <ul>
-    <li>ChatGPT</li>
-    <li>Claude & Claude Code API</li>
-    <li>Gemini</li>
-    <li>Perplexity</li>
-    <li>Hugging Face</li>
-  </ul> 
-  <li>Moderate experience for workflow implementation employing cloud compute and scaling strategies </li>
-  <ul>
-    <li>With the following cloud compute and storage services</li>
-    <ul>
-      <li>Google Cloud Platform</li>
-      <li>Amazon Web Services</li>
-      <li>Cloudflare (r2 storage)</li>
-      <li>Rackspace</li>
-      <li>Oracle Cloud Infrastructure</li>
-      <li>DigitalOcean</li>
-    </ul>
-    <li>With the following batch workload managers for AI tools</li>
-    <ul>
-      <li>SkyPilot</li>
-      <li>dstack</li>
-    </ul>  
-  </ul>    
-  <li>Experience with the following programming languages</li>
-  <ul>
-    <li>Python</li>
-    <li>Bash</li>
-    <li>Fortran</li>
-  </ul>
-</ul>
-  
-<hr>
-  
-<h2>Scientific Publications</h2>
-<p>
-Here is my <a href="https://scholar.google.com/citations?hl=en&user=uniXyQ0AAAAJ&view_op=list_works&authuser=2&sortby=pubdate">Google Scholar</a>. 
-
-<hr>  
-
-<h2>Scientific Highlights</h2>
-<ul>
-  <li> 07/2024 - <a href=https://arxiv.org/pdf/2407.13643>New preprint</a>: "Surface roughening in nanoparticle catalysts." This work challenges the assumed surface structure of nanocatalysts using machine learned force fields. Such computational methods are proven to be capable of decoupling disparate experimental observables, allowing for more direct understanding of such dynamic phenomena. </li>
-  <li> <video src="./pt_co.mp4" width="320" height="240" controls autoplay playsinline muted loop></video></li>
-  <li> 07/2024 - <a href=https://arxiv.org/pdf/2407.13607>New preprint</a>: "Atomistic evolution of active sites in multi-component heterogeneous catalysts." This work provides a machine learned force field that can directly probe the deactivation mechanism of bimetallic catalysts, and provide more accessible insight into applicable design rules.</li>
-  <li> <video src="./hpdau_new.mp4" width="320" height="240" controls autoplay playsinline muted loop></video></li>
-  <li> 05/2024 - <a href=https://www.nature.com/articles/s41524-024-01264-z>New publication</a>: "Complexity of many-body interactions in transition metals via machine-learned force fields from the TM23 data set." This work introduces TM23, a new ML potential benchmark of transition metals and test the performance of NequIP and FLARE.</li> 
-  <li> 05/2024 - <a href=https://www.nature.com/articles/s41467-024-48192-6>New publication</a>: "Low-index mesoscopic surface reconstructions of Au surfaces using Bayesian force fields." This work enables large-scale molecular dynamics simulations to describe the thermodynamics and time evolution of the low-index mesoscopic surface reconstructions of gold surfaces.</li>
-  <li> <video src="./au_recon.mp4" width="320" height="240" controls autoplay playsinline muted loop></video></li>
-  <li> 01/2024 - <a href=https://arxiv.org/pdf/2401.04359>New preprint</a>: "Unbiased atomistic predictions of crystal dislocation dynamics using Bayesian force fields." We prove that short-range atomic descriptors are up to the task of describing edge and screw dislocations in metallic copper.</li>
-</ul>  
-
-<hr>
-
-<h2>Awards</h2>
-<ul>
-  <li>2024 - American Chemical Society Computers in Chemistry Division's Best Oral Presentation at the Fall National Meeting</li>
-  <li>2021 - International Precious Metals Institute Metalor Student Award</li>
-  <li>2020 - National Science Foundation Graduate Research Fellowship</li>
-  <li>2019 - Winston Churchill Scholarship</li>
-  <li>2019 - University of Utah College of Science Undergraduate Research Scholar Award Recipient</li>
-  <li>2018 - Student of the Year in the University of Utah American Chemical Society Division of Physical Chemistry</li>
-  <li>2018 - Barry M. Goldwater Scholarship</li>
-</ul>  
-  
-<hr>
-  
-<h2>Invited Talks</h2>
-<p>
-<ul>
-  <li> August 2025 - Psi-k Conference, Lausanne, CH, Emerging artificial intelligence methods for computational materials discovery </li>
-  <li> March 2025 - American Chemical Society Spring Meeting, San Diego, CA, Energy & Fuels Division </li>
-  <li> August 2024 - Toyota Research Institute, Los Altos, CA, Accelerated Materials Design & Discovery Seminar </li>
-  <li> April 2024 - Institute for Mathematical and Statistical Innovation, Chicago, IL, Machine Learning Force Fields Workshop </li>  
-  <li> April 2024 - Argonne Center for Nanoscale Materials, Lemont, IL, Theory and Modeling Seminar </li>
-  <li> August 2023 - American Chemical Society Fall Meeting, San Fransisco, CA, Catalysis Division </li>
-</ul>
-</p>
-
-<hr>
-
-<h2>Professional Responsibilities</h2>
-<p>
-<ul>
-  <li> 2024-Present - Reviewer for Nature Portfolio Journals (npj Computational Materials & Nature Catalysis)</li>
-  <li> 2018-Present - Member of the American Chemical Society
-  <li> 2021-2024    - Member of the American Physical Society
-  <li> 2021-2024    - Member of the Materials Research Society  
-  <li> 2021-2025    - Harvard University, Graduate student research mentor </li>
-  <li> Fall 2022    - Harvard University, Teaching fellow for CHEM 160, "The Quantum World" </li>
-  <li> Spring 2021  - Harvard University, Teaching fellow for PS 11, "Frontiers and Foundations of Modern Chemistry: A Molecular and Global Perspective" </li>
-</ul>
-</p>
-
-<hr>
-
-<h2>Fun Facts</h2>
-<p>
-<ul>
-  <li>Travel enthusiast</li>
-  <li>Avid mountain biker</li>
-</ul>
-</p>
-  
+    <script>
+        // Simple script to highlight the active section in the navigation
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-<hr>
-Last updated: 04/2025
